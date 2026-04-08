@@ -207,7 +207,9 @@ def main(argv=None):
     # Save completions
     # -----------------------------------------------------------------------
     save_path = os.path.abspath(args.save_path)
-    os.makedirs(os.path.dirname(save_path) or ".", exist_ok=True)
+    save_dir = os.path.dirname(save_path)
+    if save_dir:
+        os.makedirs(save_dir, exist_ok=True)
     with open(save_path, "w", encoding="utf-8") as fh:
         json.dump(completions, fh, indent=2, ensure_ascii=False)
 

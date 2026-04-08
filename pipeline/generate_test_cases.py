@@ -113,7 +113,8 @@ def load_behaviors(behaviors_file: str) -> dict:
                 }
         else:
             # Legacy format: text=col[0], behavior_id=col[-1]
-            for row in [first_row] + list(reader):
+            import itertools
+            for row in itertools.chain([first_row], reader):
                 if not row:
                     continue
                 bid = row[-1].strip()

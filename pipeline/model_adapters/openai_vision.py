@@ -123,7 +123,7 @@ class OpenAIVisionAdapter(BaseModelAdapter):
         ]
 
         answer = ""
-        for attempt in range(1, self.max_retries + 2):
+        for attempt in range(1, self.max_retries + 1):
             try:
                 response = self._client.chat.completions.create(
                     model=self.model_id,
@@ -133,7 +133,7 @@ class OpenAIVisionAdapter(BaseModelAdapter):
                 answer = response.choices[0].message.content or ""
                 break
             except Exception as exc:
-                if attempt > self.max_retries:
+                if attempt == self.max_retries:
                     logger.error("OpenAI API error after %d retries: %s", attempt, exc)
                     break
                 logger.warning("OpenAI API error (attempt %d): %s", attempt, exc)

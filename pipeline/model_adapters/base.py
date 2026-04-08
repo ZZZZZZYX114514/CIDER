@@ -20,7 +20,7 @@ class BaseModelAdapter(abc.ABC):
             generation = adapter.generate(text="...", image_path="/abs/img.jpg")
     """
 
-    def __init__(self, config=None, device: str = "cuda:0", max_new_tokens: int = 512):
+    def __init__(self, config: str | None = None, device: str = "cuda:0", max_new_tokens: int = 512):
         """
         Args:
             config: Optional path to a YAML/JSON config file for the adapter.
